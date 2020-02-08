@@ -17,10 +17,10 @@ address = web3.toChecksumAddress('0x33B5dDA0Dd5625a230512f800f3a88b4c92de192') #
 contract = web3.eth.contract(address=address, abi=abi)
 
 # Read the default greeting
-#print(contract.functions.greet().call())
+print(contract.functions.getLastEntry().call())
 # Set a new greeting
 
-tx_hash = contract.functions.createFileEntry('filenameTest','filepathTest').transact()
+tx_hash = contract.functions.createFileEntry('newfilenameTest','newfilepathTest').transact()
 # Wait for transaction to be mined
 web3.eth.waitForTransactionReceipt(tx_hash)
 # Display the new greeting value
