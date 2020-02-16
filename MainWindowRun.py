@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets, uic
 from WebCamRecord import Ui2
 import sys
-#import Settings
+from Settings import *
 
 class Ui(QtWidgets.QMainWindow):
     def __init__(self):

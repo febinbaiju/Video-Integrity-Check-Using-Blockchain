@@ -4,7 +4,7 @@ import cv2
 from PyQt5.QtWidgets import  QApplication,QWidget, QLabel
 from PyQt5.QtCore import QThread, Qt, pyqtSignal, pyqtSlot
 from PyQt5.QtGui import QIcon,QImage, QPixmap
-#import Settings
+from Settings import *
 
 Recording = True
 
@@ -12,14 +12,14 @@ class Thread(QThread):
     changePixmap = pyqtSignal(QImage)
 
     def run(self):
-        global Recording
+        global Recording,OUTPUT_FILE_NAME
         cap = cv2.VideoCapture(0)
         # Get the Default resolutions
         frame_width = int(cap.get(3))
         frame_height = int(cap.get(4))
         
         # Define the codec and filename.
-        out = cv2.VideoWriter('output.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 25, (frame_width,frame_height))
+        out = cv2.VideoWriter(OUTPUT_FILE_NAME,cv2.VideoWriter_fourcc('M','J','P','G'), 25, (frame_width,frame_height))
 
         while True:
             if not Recording:
