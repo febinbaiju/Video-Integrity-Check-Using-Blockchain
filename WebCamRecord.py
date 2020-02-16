@@ -6,10 +6,13 @@ from PyQt5.QtCore import QThread, Qt, pyqtSignal, pyqtSlot
 from PyQt5.QtGui import QIcon,QImage, QPixmap
 #import Settings
 
+Recording = True
+
 class Thread(QThread):
     changePixmap = pyqtSignal(QImage)
 
     def run(self):
+        global Recording
         cap = cv2.VideoCapture(0)
         # Get the Default resolutions
         frame_width = int(cap.get(3))
@@ -19,6 +22,8 @@ class Thread(QThread):
         out = cv2.VideoWriter('output.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 25, (frame_width,frame_height))
 
         while True:
+            if not Recording:
+                break
             ret, frame = cap.read()
             if ret:
                 rgbImage = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -39,11 +44,17 @@ class Ui2(QtWidgets.QMainWindow):
         self.label.resize(640, 480)
         self.stopbutton = self.findChild(QtWidgets.QPushButton,'pbStopCapture')
         self.stopbutton.move(420,440)
-        self.stopbutton.clicked.connect(self.close)
+        self.stopbutton.clicked.connect(self.closeFunc)
         th = Thread(self)
         th.changePixmap.connect(self.setImage)
         th.start()
         self.show()
+
+    def closeFunc(self):
+        global Recording
+        Recording = False
+        self.close()
+
 
     @pyqtSlot(QImage)
     def setImage(self, image):
