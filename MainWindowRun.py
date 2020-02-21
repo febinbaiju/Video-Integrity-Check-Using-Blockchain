@@ -14,10 +14,6 @@ class Ui(QtWidgets.QMainWindow):
         self.exitButton = self.findChild(QtWidgets.QPushButton,'pbExit')
         self.exitButton.clicked.connect(self.close)
         self.show()
-
-    def printButtonPressed(self):
-        # This is executed when the button is pressed
-        print('printButtonPressed')
     
     def openCaptureWindow(self):
         self.w = Ui2()
