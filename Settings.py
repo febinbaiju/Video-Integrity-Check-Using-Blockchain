@@ -1,1 +1,1 @@
-OUTPUT_FILE_NAME = "output"
+OUTPUT_FILE_NAME = "VideoCaptures/capture_"
