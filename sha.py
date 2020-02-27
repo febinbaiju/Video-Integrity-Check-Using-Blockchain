@@ -1,13 +1,15 @@
-
-# Python program to find SHA256 hash string of a file
+import hmac
 import hashlib
- 
-def sha256(filename):
-    sha256_hash = hashlib.sha256()
-    with open(filename,"rb") as f:
-        for byte_block in iter(lambda: f.read(4096),b""):
-            sha256_hash.update(byte_block)
-    return sha256_hash.hexdigest()
 
-print(sha256('output.avi'))
-#print(sha256('output001.mp4'))
+def hmacsha(filename):
+    digest_maker = hmac.new(b'helloworld',b'',hashlib.sha256,)
+    with open(filename, 'rb') as f:
+        while True:
+            block = f.read(1024)
+            if not block:
+                break
+            digest_maker.update(block)
+    digest = digest_maker.hexdigest()
+    return digest
+
+print(hmacsha('output.avi'))

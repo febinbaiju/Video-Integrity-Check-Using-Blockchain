@@ -1,6 +1,8 @@
 from PyQt5 import QtWidgets, uic
 import sys
 import cv2
+import calendar;
+import time;
 from PyQt5.QtWidgets import  QApplication,QWidget, QLabel
 from PyQt5.QtCore import QThread, Qt, pyqtSignal, pyqtSlot
 from PyQt5.QtGui import QIcon,QImage, QPixmap
@@ -19,7 +21,7 @@ class Thread(QThread):
         frame_height = int(cap.get(4))
         
         # Define the codec and filename.
-        out = cv2.VideoWriter(OUTPUT_FILE_NAME,cv2.VideoWriter_fourcc('M','J','P','G'), 25, (frame_width,frame_height))
+        out = cv2.VideoWriter(OUTPUT_FILE_NAME+str(calendar.timegm(time.gmtime()))+".avi",cv2.VideoWriter_fourcc('M','J','P','G'), 25, (frame_width,frame_height))
 
         while True:
             if not Recording:

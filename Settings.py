@@ -1,1 +1,1 @@
-OUTPUT_FILE_NAME = "output.avi"
+OUTPUT_FILE_NAME = "output"
