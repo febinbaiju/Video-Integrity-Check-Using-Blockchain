@@ -7,26 +7,37 @@ from PyQt5.QtWidgets import  QApplication,QWidget, QLabel
 from PyQt5.QtCore import QThread, Qt, pyqtSignal, pyqtSlot
 from PyQt5.QtGui import QIcon,QImage, QPixmap
 from Settings import *
+from sha import *
 
 Recording = True
+
+filepath = None
 
 class Thread(QThread):
     changePixmap = pyqtSignal(QImage)
 
     def run(self):
-        global Recording,OUTPUT_FILE_NAME
+        global Recording,OUTPUT_FILE_NAME,filepath
         cap = cv2.VideoCapture(0)
         # Get the Default resolutions
         frame_width = int(cap.get(3))
         frame_height = int(cap.get(4))
         
         # Define the codec and filename.
-        out = cv2.VideoWriter(OUTPUT_FILE_NAME+str(calendar.timegm(time.gmtime()))+".avi",cv2.VideoWriter_fourcc('M','J','P','G'), 25, (frame_width,frame_height))
+        filename = str(calendar.timegm(time.gmtime()))+".avi"
+        filepath = OUTPUT_FILE_NAME+filename
+        out = cv2.VideoWriter(filepath,cv2.VideoWriter_fourcc('M','J','P','G'), 25, (frame_width,frame_height))
 
         while True:
             if not Recording:
                 cap.release()
+                out.release()
                 del cap
+                del out
+                h_filename = hmacsha(filename)
+                h_filepath = hmacsha(filepath)
+                h_file = hmacsha_file(filepath)
+                
                 break
             ret, frame = cap.read()
             if ret:
@@ -41,10 +52,7 @@ class Thread(QThread):
 counter = 0
 class Ui2(QtWidgets.QMainWindow):
     def __init__(self):
-        global counter
-        counter=counter+1
-        print(counter)
-        super().__init__()
+        super(Ui2,self).__init__()
         uic.loadUi('capturewindow.ui', self)
         self.resize(900,600)
         self.label = self.findChild(QtWidgets.QLabel, 'label')
@@ -56,11 +64,13 @@ class Ui2(QtWidgets.QMainWindow):
         th.changePixmap.connect(self.setImage)
         th.start()
         self.show()
+        self.close()
 
     def closeFunc(self):
         global Recording
         Recording = False
         self.close()
+        
 
 
     @pyqtSlot(QImage)
