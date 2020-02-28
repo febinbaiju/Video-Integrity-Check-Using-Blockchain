@@ -9,14 +9,15 @@ contract Files
         uint id;
         string filename;
         string filepath;
+        string filehash;
     }
 
     mapping(uint => File) files;
 
-    function createFileEntry(string memory _filename,string memory _filepath) public
+    function createFileEntry(string memory _filename,string memory _filepath,string memory _filehash) public
     {
         fileCount++;
-        files[fileCount] = File(fileCount,_filename,_filepath);
+        files[fileCount] = File(fileCount,_filename,_filepath,_filehash);
     }
     
     function getTotalCount() view public returns (uint)
@@ -27,7 +28,9 @@ contract Files
     
       function getLastEntry() view public returns (string memory) {
                     string memory fname = files[fileCount].filename;
-                     return fname;
+                    string memory fhash = files[fileCount].filehash;
+                    string memory filepath = files[fileCount].filepath;
+                     return string(abi.encodePacked(fname, filepath,fhash));
                   }
   
 }
