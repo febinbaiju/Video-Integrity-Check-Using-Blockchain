@@ -1,13 +1,14 @@
 from PyQt5 import QtWidgets, uic
 import sys
 import cv2
-import calendar;
-import time;
+import calendar
+import time
 from PyQt5.QtWidgets import  QApplication,QWidget, QLabel
 from PyQt5.QtCore import QThread, Qt, pyqtSignal, pyqtSlot
 from PyQt5.QtGui import QIcon,QImage, QPixmap
 from Settings import *
 from sha import *
+from app import *
 
 Recording = True
 
@@ -37,7 +38,7 @@ class Thread(QThread):
                 h_filename = hmacsha(filename)
                 h_filepath = hmacsha(filepath)
                 h_file = hmacsha_file(filepath)
-                
+
                 break
             ret, frame = cap.read()
             if ret:
