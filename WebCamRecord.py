@@ -25,6 +25,8 @@ class Thread(QThread):
 
         while True:
             if not Recording:
+                cap.release()
+                del cap
                 break
             ret, frame = cap.read()
             if ret:
@@ -36,10 +38,13 @@ class Thread(QThread):
                 p = convertToQtFormat.scaled(640, 480, Qt.KeepAspectRatio)
                 self.changePixmap.emit(p)
 
-
+counter = 0
 class Ui2(QtWidgets.QMainWindow):
     def __init__(self):
-        super(Ui2, self).__init__()
+        global counter
+        counter=counter+1
+        print(counter)
+        super().__init__()
         uic.loadUi('capturewindow.ui', self)
         self.resize(900,600)
         self.label = self.findChild(QtWidgets.QLabel, 'label')
@@ -65,6 +70,7 @@ class Ui2(QtWidgets.QMainWindow):
 
 
 if __name__ == '__main__':
+    Recording = True
     app = QtWidgets.QApplication(sys.argv)
     window = Ui2()
     app.exec_()

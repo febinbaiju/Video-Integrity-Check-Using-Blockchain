@@ -9,7 +9,6 @@ contract Files
         uint id;
         string filename;
         string filepath;
-        bool verified;
     }
 
     mapping(uint => File) files;
@@ -17,12 +16,18 @@ contract Files
     function createFileEntry(string memory _filename,string memory _filepath) public
     {
         fileCount++;
-        files[fileCount] = File(fileCount,_filename,_filepath,false);
+        files[fileCount] = File(fileCount,_filename,_filepath);
     }
     
-    function getLastEntry() view public returns (string memory)
+    function getTotalCount() view public returns (uint)
     {
-        string memory fname = files[fileCount].filename;
-        return fname;
+        return fileCount;
     }
+    
+    
+      function getLastEntry() view public returns (string memory) {
+                    string memory fname = files[fileCount].filename;
+                     return fname;
+                  }
+  
 }

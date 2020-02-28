@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets, uic
-from WebCamRecord import Ui2
 import sys
 from Settings import *
+from WebCamRecord import Ui2
 
 class Ui(QtWidgets.QMainWindow):
     def __init__(self):
@@ -16,8 +16,8 @@ class Ui(QtWidgets.QMainWindow):
         self.show()
     
     def openCaptureWindow(self):
-        self.w = Ui2()
-        self.w.show()
+        self.FT = Ui2()
+        self.FT.show()
 
 app = QtWidgets.QApplication(sys.argv)
 window = Ui()
