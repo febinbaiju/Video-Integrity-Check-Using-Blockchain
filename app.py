@@ -9,7 +9,7 @@ class Blockchain():
         self.contract = None
         self.web3 = None
         self.connect()
-        
+
     def connect(self):
         # Set up web3 connection with Ganache
         ganache_url = "http://127.0.0.1:7545"
@@ -37,6 +37,3 @@ class Blockchain():
         
         print(self.contract.functions.getLastEntry().call())
         print(self.contract.functions.getTotalCount().call())
-
-block = Blockchain()
-block.read()
