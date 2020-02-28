@@ -39,6 +39,9 @@ class Thread(QThread):
                 h_filepath = hmacsha(filepath)
                 h_file = hmacsha_file(filepath)
 
+                block = Blockchain() #Blockchain implementation
+                #block.read()
+
                 break
             ret, frame = cap.read()
             if ret:
