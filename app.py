@@ -15,7 +15,7 @@ class Blockchain():
         ganache_url = "http://127.0.0.1:7545"
         self.web3 = Web3(Web3.HTTPProvider(ganache_url))
         # TODO: Deploy the Greeter contract to Ganache with remix.ethereum.org
-        # Set a default account to sign transactions - this account is unlocked with Ganache
+        # Set a default ac. hem count to sign transactions - this account is unlocked with Ganache
         self.web3.eth.defaultAccount = self.web3.eth.accounts[0]
         
         # Greeter contract ABI
