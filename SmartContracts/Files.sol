@@ -30,7 +30,8 @@ contract Files
                     string memory fname = files[fileCount].filename;
                     string memory fhash = files[fileCount].filehash;
                     string memory filepath = files[fileCount].filepath;
-                     return string(abi.encodePacked(fname, filepath,fhash));
+                    return string(fname);
+                     ///return string(abi.encodePacked(fname, filepath,fhash));
                   }
   
 }
