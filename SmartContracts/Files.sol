@@ -9,30 +9,35 @@ contract Files
         uint id;
         string filename;
         string filepath;
-        string key;
-        string enckey;
+        string pubkey;
+        string filehash;
     }
 
     mapping(uint => File) files;
 
-    function createFileEntry(string memory _filename,string memory _filepath,string memory _filehash) public
+    function createFileEntry(string memory _filename,string memory _filepath,string memory _pubkey,string memory _filehash) public
     {
         fileCount++;
-        files[fileCount] = File(fileCount,_filename,_filepath,_filehash);
+        files[fileCount] = File(fileCount,_filename,_filepath,_pubkey,_filehash);
     }
-    
+
     function getTotalCount() view public returns (uint)
     {
         return fileCount;
     }
-    
-    
+
+
       function getLastEntry() view public returns (string memory) {
-                    string memory fname = files[fileCount].filename;
-                    string memory fhash = files[fileCount].filehash;
-                    string memory filepath = files[fileCount].filepath;
-                    return string(fname);
-                     ///return string(abi.encodePacked(fname, filepath,fhash));
+                    ///string memory fname = files[fileCount].filename;
+                    string memory filehash = files[fileCount].filehash;
+                    string memory pubkey = files[fileCount].pubkey;
+                    ///string memory filepath = files[fileCount].filepath;
+                    return string(abi.encodePacked(pubkey," ",filehash));
+                    ///return string(abi.encodePacked(fname, filepath,pubkey,filehash));
                   }
-  
+
+     function getFullEntries() view public returns (string memory) {
+
+     }
+
 }

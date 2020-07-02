@@ -21,6 +21,3 @@ def get_encrypted_key():
 
     (encryptKey, ciphertextPubKey) = ecc_calc_encryption_keys(pubKey, curve)
     return (privKey, compress_point(encryptKey))
-
-
-print(get_encrypted_key())

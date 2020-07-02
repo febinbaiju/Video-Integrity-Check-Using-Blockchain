@@ -9,6 +9,7 @@ from PyQt5.QtGui import QIcon,QImage, QPixmap
 from Settings import *
 from sha import *
 from app import *
+from eccencrypt import get_encrypted_key
 
 Recording = True
 
@@ -35,13 +36,15 @@ class Thread(QThread):
                 out.release()
                 del cap
                 del out
-                h_filename = hmacsha(filename)
-                h_filepath = hmacsha(filepath)
-                h_file = hmacsha_file(filepath)
-
+                h_filename = filename
+                h_filepath = filepath
+                ecc_encryption = get_encrypted_key()
+                h_pubkey = ecc_encryption[0]
+                h_key = ecc_encryption[1]
+                print("KEY USED: ",h_key)
+                h_file = hmacsha_file(filepath,h_key)
                 block = Blockchain() #Blockchain implementation
-                block.add(h_filename,h_filepath,h_file)
-
+                block.add(h_filename,h_filepath,h_pubkey,h_file)
                 break
             ret, frame = cap.read()
             if ret:
