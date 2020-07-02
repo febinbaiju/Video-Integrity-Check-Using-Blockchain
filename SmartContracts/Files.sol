@@ -9,7 +9,8 @@ contract Files
         uint id;
         string filename;
         string filepath;
-        string filehash;
+        string key;
+        string enckey;
     }
 
     mapping(uint => File) files;
