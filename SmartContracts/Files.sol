@@ -1,8 +1,10 @@
 pragma solidity ^0.5.0;
+pragma experimental ABIEncoderV2;
 
 contract Files
 {
     uint public fileCount = 0;
+    string [] private keys;
 
     struct File
     {
@@ -15,16 +17,38 @@ contract Files
 
     mapping(uint => File) files;
 
+      function addKey (string memory str) public {
+    keys.push (str);
+  }
+
+    function getKeys () public view returns (string [] memory) {
+    return keys;
+  }
+
     function createFileEntry(string memory _filename,string memory _filepath,string memory _pubkey,string memory _filehash) public
     {
         fileCount++;
         files[fileCount] = File(fileCount,_filename,_filepath,_pubkey,_filehash);
+        addKeys();
     }
 
     function getTotalCount() view public returns (uint)
     {
         return fileCount;
     }
+
+    function addKeys() public
+    {
+        delete keys;
+
+        for(uint i=0; i <= getTotalCount(); i++)
+        {
+            addKey(files[i].pubkey);
+        }
+    }
+
+
+
 
 
       function getLastEntry() view public returns (string memory) {
@@ -35,9 +59,5 @@ contract Files
                     return string(abi.encodePacked(pubkey," ",filehash));
                     ///return string(abi.encodePacked(fname, filepath,pubkey,filehash));
                   }
-
-     function getFullEntries() view public returns (string memory) {
-
-     }
 
 }
