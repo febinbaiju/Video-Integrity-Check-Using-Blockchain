@@ -15,8 +15,12 @@ class Ui3(QtWidgets.QMainWindow):
         self.show()
     
     def openFileChooser(self):
-        self.FT = Ui3()
-        self.FT.show()
+        options = QtWidgets.QFileDialog.Options()
+        options |= QtWidgets.QFileDialog.DontUseNativeDialog
+        fileName, _ = QtWidgets.QFileDialog.getOpenFileName(self,"QFileDialog.getOpenFileName()", "","All Files (*);;Python Files (*.py)", options=options)
+        if fileName:
+            self.filelabel = self.findChild(QtWidgets.QLabel,'lblfilename')
+            self.filelabel.setText(fileName)
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
