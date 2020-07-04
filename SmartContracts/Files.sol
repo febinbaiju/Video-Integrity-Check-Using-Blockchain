@@ -69,12 +69,12 @@ contract Files
 
 
       function getLastEntry() view public returns (string memory) {
-                    ///string memory fname = files[fileCount].filename;
+                    string memory fname = files[fileCount].filename;
                     string memory filehash = files[fileCount].filehash;
                     string memory pubkey = files[fileCount].pubkey;
-                    ///string memory filepath = files[fileCount].filepath;
-                    return string(abi.encodePacked(pubkey," ",filehash));
-                    ///return string(abi.encodePacked(fname, filepath,pubkey,filehash));
+                    string memory filepath = files[fileCount].filepath;
+                    ///return string(abi.encodePacked(pubkey," ",filehash));
+                    return string(abi.encodePacked(fname, " ",filepath, " ",pubkey, " ",filehash));
                   }
 
 }
