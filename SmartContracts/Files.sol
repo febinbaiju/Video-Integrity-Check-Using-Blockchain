@@ -5,6 +5,7 @@ contract Files
 {
     uint public fileCount = 0;
     string [] private keys;
+    string [] private hashes;
 
     struct File
     {
@@ -21,15 +22,23 @@ contract Files
     keys.push (str);
   }
 
+        function addHash (string memory str) public {
+    hashes.push (str);
+  }
+
+
     function getKeys () public view returns (string [] memory) {
     return keys;
   }
-
+    function getHashes () public view returns (string [] memory) {
+    return hashes;
+  }
     function createFileEntry(string memory _filename,string memory _filepath,string memory _pubkey,string memory _filehash) public
     {
         fileCount++;
         files[fileCount] = File(fileCount,_filename,_filepath,_pubkey,_filehash);
         addKeys();
+        addHashes();
     }
 
     function getTotalCount() view public returns (uint)
@@ -47,7 +56,15 @@ contract Files
         }
     }
 
+        function addHashes() public
+    {
+        delete hashes;
 
+        for(uint i=0; i <= getTotalCount(); i++)
+        {
+            addHash(files[i].filehash);
+        }
+    }
 
 
 
