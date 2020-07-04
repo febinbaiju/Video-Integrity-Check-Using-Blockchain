@@ -3,6 +3,7 @@ import sys
 from Settings import *
 from WebCamRecord import Ui2
 from Verification import Ui3
+from Uploadfile import  Ui4
 
 
 class Ui(QtWidgets.QMainWindow):
@@ -16,12 +17,19 @@ class Ui(QtWidgets.QMainWindow):
         self.button = self.findChild(QtWidgets.QPushButton, 'pbVerification')
         self.button.clicked.connect(self.openVerificationWindow)
 
+        self.button = self.findChild(QtWidgets.QPushButton, 'pbUploadFile')
+        self.button.clicked.connect(self.openUploadfileWindow)
+
         self.exitButton = self.findChild(QtWidgets.QPushButton,'pbExit')
         self.exitButton.clicked.connect(self.close)
         self.show()
     
     def openCaptureWindow(self):
         self.FT = Ui2()
+        self.FT.show()
+
+    def openUploadfileWindow(self):
+        self.FT = Ui4()
         self.FT.show()
 
     def openVerificationWindow(self):

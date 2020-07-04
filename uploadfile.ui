@@ -14,11 +14,11 @@
    <string>Video Integrity using Blockchain</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pbExit">
+   <widget class="QPushButton" name="pbExit3">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>400</y>
+      <x>300</x>
+      <y>220</y>
       <width>141</width>
       <height>31</height>
      </rect>
@@ -27,43 +27,30 @@
      <string>Exit</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pbStartVideoCapture">
+   <widget class="QPushButton" name="pbChoose2">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>120</y>
-      <width>151</width>
-      <height>41</height>
+      <x>120</x>
+      <y>220</y>
+      <width>141</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string>Start Video Capture</string>
+     <string>Choose File</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pbVerification">
+   <widget class="QLabel" name="lblfilename2">
     <property name="geometry">
      <rect>
-      <x>390</x>
-      <y>120</y>
-      <width>161</width>
-      <height>41</height>
+      <x>190</x>
+      <y>60</y>
+      <width>171</width>
+      <height>61</height>
      </rect>
     </property>
     <property name="text">
-     <string>Verification</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pbUploadFile">
-    <property name="geometry">
-     <rect>
-      <x>220</x>
-      <y>120</y>
-      <width>151</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Upload File</string>
+     <string/>
     </property>
    </widget>
   </widget>

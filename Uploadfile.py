@@ -4,15 +4,15 @@ from Settings import *
 from sha import hmacsha_file
 from app import *
 
-class Ui3(QtWidgets.QMainWindow):
+class Ui4(QtWidgets.QMainWindow):
     def __init__(self):
-        super(Ui3, self).__init__()
-        uic.loadUi('verification.ui', self)
+        super(Ui4, self).__init__()
+        uic.loadUi('uploadfile.ui', self)
 
-        self.button = self.findChild(QtWidgets.QPushButton, 'pbChoose')
+        self.button = self.findChild(QtWidgets.QPushButton, 'pbChoose2')
         self.button.clicked.connect(self.openFileChooser)
 
-        self.exitButton = self.findChild(QtWidgets.QPushButton,'pbExit2')
+        self.exitButton = self.findChild(QtWidgets.QPushButton,'pbExit3')
         self.exitButton.clicked.connect(self.close)
         self.show()
     
@@ -21,7 +21,7 @@ class Ui3(QtWidgets.QMainWindow):
         options |= QtWidgets.QFileDialog.DontUseNativeDialog
         fileName, _ = QtWidgets.QFileDialog.getOpenFileName(self,"QFileDialog.getOpenFileName()", "","AVI Files (*.avi)", options=options)
         if fileName:
-            self.filelabel = self.findChild(QtWidgets.QLabel,'lblfilename')
+            self.filelabel = self.findChild(QtWidgets.QLabel,'lblfilename2')
             flag = False
             block = Blockchain()
             hashes = block.getHashes()
@@ -37,5 +37,5 @@ class Ui3(QtWidgets.QMainWindow):
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
-    window = Ui3()
+    window = Ui4()
     app.exec_()
