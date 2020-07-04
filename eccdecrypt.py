@@ -20,5 +20,3 @@ def decrypt_key(pkey):
     (ciphertextPubKey) = compute_public_ciphertext(g)
     decryptKey = ecc_calc_decryption_key(privKey, ciphertextPubKey)
     return compress_point(decryptKey)
-
-print(decrypt_key("44406419237963342662734533429260614787386541346756073819296616040113116162371"))

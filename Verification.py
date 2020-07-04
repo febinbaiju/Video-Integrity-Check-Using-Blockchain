@@ -1,6 +1,8 @@
 from PyQt5 import QtWidgets, uic
 import sys
 from Settings import *
+from sha import hmacsha_file
+from app import *
 
 class Ui3(QtWidgets.QMainWindow):
     def __init__(self):
@@ -20,7 +22,18 @@ class Ui3(QtWidgets.QMainWindow):
         fileName, _ = QtWidgets.QFileDialog.getOpenFileName(self,"QFileDialog.getOpenFileName()", "","All Files (*);;Python Files (*.py)", options=options)
         if fileName:
             self.filelabel = self.findChild(QtWidgets.QLabel,'lblfilename')
-            self.filelabel.setText(fileName)
+            flag = False
+            block = Blockchain()
+            hashes = block.getHashes()
+            for key in block.getKeys():
+                check = hmacsha_file(fileName,key)
+                if check in hashes:
+                    flag = True
+                    break
+            if flag:
+                self.filelabel.setText("VIDEO VERIFIED")
+            else:
+                self.filelabel.setText("TAMPERED VIDEO")
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
