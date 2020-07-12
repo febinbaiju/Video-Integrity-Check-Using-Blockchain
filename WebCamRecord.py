@@ -41,7 +41,7 @@ class Thread(QThread):
                 ecc_encryption = get_encrypted_key()
                 h_pubkey = ecc_encryption[0]
                 h_key = ecc_encryption[1]
-                print("KEY USED: ",h_key)
+                print("KEY USED: ",h_key[0:15])
                 h_file = hmacsha_file(filepath,h_key)
                 block = Blockchain() #Blockchain implementation
                 block.add(h_filename,h_filepath,h_pubkey,h_file)

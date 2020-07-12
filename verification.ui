@@ -50,7 +50,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>FILENAME</string>
+     <string>RESULTS</string>
     </property>
    </widget>
   </widget>

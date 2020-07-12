@@ -3,6 +3,7 @@ import hashlib
 from Settings import *
 
 def hmacsha_file(filename,key):
+    key = key[0:15]
     digest_maker = hmac.new(bytes(key,'utf-8'),b'',hashlib.sha256,)
     with open(filename, 'rb') as f:
         while True:
@@ -14,5 +15,6 @@ def hmacsha_file(filename,key):
     return digest
 
 def hmacsha(string,key):
+    key = key[0:15]
     h = hmac.new( bytes(key,'utf-8'),bytes(string, 'utf-8') , hashlib.sha256 )
     return h.hexdigest()
